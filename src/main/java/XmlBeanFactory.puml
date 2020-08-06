@@ -1,0 +1,22 @@
+@startuml
+bf.BeanFactoryTest -> ClassPathResource.ClassPathResource: 1:new ClassPathResource("beanFactoryTest.xml")
+
+activate ClassPathResource.ClassPathResource #FFBBBB
+
+ClassPathResource.ClassPathResource --> bf.BeanFactoryTest: 2:ClassPathResource
+deactivate ClassPathResource.ClassPathResource
+
+bf.BeanFactoryTest->XmlBeanFactory.XmlBeanFactory : 3.new XmlBeanFactory(resource)
+activate XmlBeanFactory.XmlBeanFactory #FFBBBB
+XmlBeanFactory.XmlBeanFactory -> reader.XmlBeanDefinitionReader : 3.1 loadBeanDefinitionReader
+activate reader.XmlBeanDefinitionReader #FFBBBB
+
+reader.XmlBeanDefinitionReader --> XmlBeanFactory.XmlBeanFactory : 3.2 loadedBeanDefinition:num:int
+deactivate reader.XmlBeanDefinitionReader
+
+XmlBeanFactory.XmlBeanFactory --> bf.BeanFactoryTest
+deactivate XmlBeanFactory.XmlBeanFactory
+
+
+
+@enduml
